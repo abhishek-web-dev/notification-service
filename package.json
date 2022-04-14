@@ -1,5 +1,5 @@
 {
-  "name": "node-express-starting-project",
+  "name": "notification-service-project",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,7 +8,7 @@
     "docs": "apidoc -c ./lib/apidoc.json -i app/modules -o lib/apidoc/"
   },
   "keywords": [],
-  "author": "",
+  "author": "Abhishek",
   "license": "ISC",
   "dependencies": {
     "apidoc": "^0.28.1",
