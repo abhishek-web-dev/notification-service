@@ -7,7 +7,7 @@ const { verifyAuthToken } = require('../lib/middlewares/isAuthenticated')
 
 
 router.use(`/health`, require('../app/modules/health/route'));
-router.use(`/story`, require('../app/modules/user/route'));
+router.use(`/user`, require('../app/modules/user/route'));
 
 
 

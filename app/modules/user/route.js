@@ -2,7 +2,7 @@
 const router = require('express').Router();
 
 // feature modules
-const controller = require('../modules/story/controller');
+const controller = require('../modules/user/controller');
 const asyncExecute = require('../../lib/middlewares/asyncExecute');
 
 
