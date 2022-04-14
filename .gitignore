@@ -1,0 +1,8 @@
+
+# all dependency
+node_modules
+
+# prod environment file
+.prod.env
+
+
