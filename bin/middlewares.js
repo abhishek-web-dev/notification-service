@@ -10,9 +10,9 @@ const config = require('./../lib/config');
 module.exports = (app) => {
 
     // serving apidoc to client
-    if (config.environment === 'development') {
-        app.use('/apidoc', express.static('lib/apidoc'));
-    }
+    // if (config.environment === 'development') {
+    app.use('/apidoc', express.static('lib/apidoc'));
+    // }
 
     app.use(cors());
     app.use(helmet());
