@@ -2,15 +2,11 @@
 const model = require('./model');
 
 
-const getCookies = () => {
-  return model.aggregate(
-    [{ $sample: { size: 1 } }]
-  );
-  // return model.findOne();
+const getUsers = (filter = {}, select = '') => {
+  return model.find(filter).select(select).lean();
 };
 
 
-
 module.exports = {
-  getCookies
+  getUsers
 };

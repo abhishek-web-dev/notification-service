@@ -1,12 +1,15 @@
 
-const MAX_OTP_ATTEMPTS = 3;
+const MALE = 'male';
+const FEMALE = 'female';
+const OTHERS = 'others';
 
-const OTP_TYPE_PHONE_LOGIN = 1;
-const OTP_TYPE_PHONE_UPDATE = 2;
+const GENDER = [MALE, FEMALE, OTHERS];
+
 
 
 module.exports = {
-  MAX_OTP_ATTEMPTS,
-  OTP_TYPE_PHONE_LOGIN,
-  OTP_TYPE_PHONE_UPDATE,
+  MALE,
+  FEMALE,
+  OTHERS,
+  GENDER
 };

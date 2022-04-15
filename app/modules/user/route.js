@@ -2,11 +2,11 @@
 const router = require('express').Router();
 
 // feature modules
-const controller = require('../modules/user/controller');
+// const controller = require('../modules/user/controller');
 const asyncExecute = require('../../lib/middlewares/asyncExecute');
 
 
-router.get('/:userId', asyncExecute(controller.getStory));
+// router.get('/:userId', asyncExecute(controller.getStory));
 /**
  * @apiGroup STORY 
  * @apiVersion  1.0.0

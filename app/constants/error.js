@@ -8,10 +8,10 @@
 // feature modules
 const { httpCode, httpMessage } = require('./http');
 
-// story module ERROR_CODES and ERROR_INFO are imported
+// user module ERROR_CODES and ERROR_INFO are imported
 const {
-  ERROR_CODES: STORY_COMPONENT_ERROR_CODES,
-  ERROR_INFO: STORY_COMPONENT_ERROR_INFO,
+  ERROR_CODES: USER_COMPONENT_ERROR_CODES,
+  ERROR_INFO: USER_COMPONENT_ERROR_INFO,
 } = require('../modules/user/error');
 
 const ERROR_CODES = {
@@ -25,7 +25,7 @@ const ERROR_CODES = {
   INTERNAL_SERVER_ERROR: 1005,
   INVALID_JWT_ERROR: 1006,
 
-  ...STORY_COMPONENT_ERROR_CODES
+  ...USER_COMPONENT_ERROR_CODES
 };
 
 //httpCode, errorDescription, type, errorUserTitle, errorUserMsg
@@ -80,7 +80,7 @@ const ERROR_INFO = {
     httpCode: httpCode.UNAUTHORIZED
   },
 
-  ...STORY_COMPONENT_ERROR_INFO
+  ...USER_COMPONENT_ERROR_INFO
 };
 
 module.exports = {
