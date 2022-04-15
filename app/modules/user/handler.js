@@ -1,3 +1,3 @@
-// Write here socket controller code
+// Write here user socket controller code
 
 

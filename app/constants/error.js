@@ -10,9 +10,9 @@ const { httpCode, httpMessage } = require('./http');
 
 // user module ERROR_CODES and ERROR_INFO are imported
 const {
-  ERROR_CODES: USER_COMPONENT_ERROR_CODES,
-  ERROR_INFO: USER_COMPONENT_ERROR_INFO,
-} = require('../modules/user/error');
+  ERROR_CODES: NOTIFICATION_COMPONENT_ERROR_CODES,
+  ERROR_INFO: NOTIFICATION_COMPONENT_ERROR_INFO,
+} = require('../modules/notification/error');
 
 const ERROR_CODES = {
   ROUTE_NOT_FOUND: 1000,
@@ -25,7 +25,7 @@ const ERROR_CODES = {
   INTERNAL_SERVER_ERROR: 1005,
   INVALID_JWT_ERROR: 1006,
 
-  ...USER_COMPONENT_ERROR_CODES
+  ...NOTIFICATION_COMPONENT_ERROR_CODES
 };
 
 //httpCode, errorDescription, type, errorUserTitle, errorUserMsg
@@ -80,7 +80,7 @@ const ERROR_INFO = {
     httpCode: httpCode.UNAUTHORIZED
   },
 
-  ...USER_COMPONENT_ERROR_INFO
+  ...NOTIFICATION_COMPONENT_ERROR_INFO
 };
 
 module.exports = {

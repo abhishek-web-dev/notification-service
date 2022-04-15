@@ -1,11 +1,19 @@
 // feature modules
 const userDAL = require("../user/DAL");
-// const { ERROR_CODES } = require("./error");
+const { ERROR_CODES } = require("./error");
 const AppError = require("../../../lib/errorClasses/appError");
+const constants = require('./constants');
+const sms = require('../sms');
 
 
 const sendAdHocNotification = async (body) => {
-  const { gender, subscription, age } = body;
+  //I am assuming here twilioNumber and message will be valid input.
+  const { gender, subscription, age, notificationType, twilioNumber, message } = body;
+  let result;
+
+  //validate age limit
+  if (age.start > age.end)
+    throw new AppError(ERROR_CODES.INVALID_AGE_IN_NOTIFICATION);
 
   // get user lists
   const userList = await userDAL.getUsers({
@@ -15,14 +23,33 @@ const sendAdHocNotification = async (body) => {
   });
   console.log('userList ', userList.length)
 
-  //schedule all type of notification
+  if (!userList.length)
+    return { message: 'Ok' }
 
+  //schedule all type of notification
+  if (notificationType === constants.SMS) {
+    //only sms notification has implemented
+    result = await Promise.allSettled(userList.map(user => sms.sendSmsToOneNumber({
+      userNumber: user.mobileNumber,
+      twilioNumber,
+      body: message
+    })));
+  }
+  else if (notificationType === constants.WHATSAPP) {
+    // write logic to send whatsapp notification
+    result = [];
+  }
+  else if (notificationType === constants.SLACK) {
+    // write logic to send slack notification
+    result = [];
+  }
+
+  // TODO: schedule for faild notification
+  result.map(r => {
+    console.log('result : ', r.status, r.value)
+  })
 
   //send response
-
-
-  //throw new AppError(ERROR_CODES.ERROR_FROM_PROXY_SERVER);
-
   return { message: 'Ok' }
 }
 

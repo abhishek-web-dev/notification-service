@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   age: { type: Number, required: true },
   gender: { type: String, enum: constants.GENDER },
-  mobileNumber: { type: String, require: true },
+  mobileNumber: { type: String, require: true },//i have assumed use will have only 1 mobile number
   subscription: { type: Boolean, default: false }
 }, { timestamps: true });
 

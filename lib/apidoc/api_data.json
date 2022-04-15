@@ -20,6 +20,52 @@
     "name": "GetHealth"
   },
   {
+    "group": "NOTIFICATION",
+    "version": "1.0.0",
+    "description": "<p>API to send ad hoc notification for whatsapp, sms, slack.</p>",
+    "type": "post",
+    "url": "/notification/",
+    "title": "send ad hoc notification",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "allowedValues": [
+              "\"male\"",
+              "\"female\""
+            ],
+            "optional": false,
+            "field": "gender",
+            "description": "<p>Send user gender as a body parameter</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: status - 200",
+          "content": "{\n    \"statusCode\": 200,\n    \"result\": {\n        \"message\": \"Ok\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response: status - 500",
+          "content": "{\n    \"statusCode\": 400,\n    \"error\": {\n        \"errorDescription\": \"Please enter valid age limit!\",\n        \"type\": \"notification\",\n        \"errorUserTitle\": \"\",\n        \"errorUserMsg\": \"Oops! invalid parameter.\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/modules/notification/route.js",
+    "groupTitle": "NOTIFICATION",
+    "name": "PostNotification"
+  },
+  {
     "group": "STORY",
     "version": "1.0.0",
     "description": "<p>API to get user instagram stories.</p>",

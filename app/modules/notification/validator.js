@@ -10,7 +10,9 @@ const sendAdHocNotification = {
     gender: Joi.valid(...userConstants.GENDER),
     subscription: Joi.boolean().required(),
     age: Joi.object().keys({ start: Joi.number().min(1), end: Joi.number().min(1) }),
-    notificationType: Joi.valid(...constants.NOTIFICATION_TYPE)
+    notificationType: Joi.valid(...constants.NOTIFICATION_TYPE),
+    twilioNumber: Joi.string().required(),
+    message: Joi.string().required()
   })
 };
 
