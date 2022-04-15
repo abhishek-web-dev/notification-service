@@ -12,12 +12,12 @@ const sendMessageToOneNumber = async (data) => {
         to: `whatsapp:${userNumber}`
       });
 
-    console.log(response.sid, response.status)
+    console.log('whatsapp : ', response.sid, response.status)
     return { success: true };
   }
   catch (e) {
-    console.log(e);
-    return { success: false, user };
+    // console.log(e);
+    return { success: false, data };
   }
 
 }

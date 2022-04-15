@@ -23,6 +23,9 @@ const sendSmsNotificationToOneUser = async (user, smsConfig) => {
 
 }
 
+// business number has not verified. so, whatsapp messaging will not work in testing but
+// once we will have WhatsApp Business Profile. this code will work.
+// this whatsapp notification has disabled from config. 
 const sendWhatsappNotificationToOneUser = async (user, whatsappConfig) => {
   if (!whatsappConfig)
     return { success: true };
@@ -53,11 +56,12 @@ const sendNotification = async () => {
     configDAL.getOneConfig({ type: configConstants.DAILY_WHATSAPP, isActive: true }),
   ]);
 
-
+  console.log('userList.length ', userList.length)
   if (!userList.length)//user list zero
     return;
 
   // send all types of notification for each users
+  // just we will have to add different type of notification module
   let result = await Promise.allSettled([
     ...(userList.map(user => sendSmsNotificationToOneUser(user, smsConfig))),
     ...(userList.map(user => sendWhatsappNotificationToOneUser(user, whatsappConfig)))
@@ -65,13 +69,14 @@ const sendNotification = async () => {
 
   // TODO: schedule for faild noti.
   result.map(r => {
-    console.log('result : ', r.status)
+    console.log('result : ', r.status, r.value)
   })
 }
 
 //push notification daily at 8 AM
 const dailyPushNotificatioCron = () => {
-  const test1 = '0 */1 * * * *';
+  console.log('Cron has started!')
+  const test1 = '0 */1 * * * *';//every minutes
   const prod = '0 0 08 * * *';//every day 8 AM
   const job = new CronJob(test1, sendNotification);
   job.start();

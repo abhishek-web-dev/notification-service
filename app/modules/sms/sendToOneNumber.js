@@ -12,12 +12,12 @@ const sendSmsToOneNumber = async (data) => {
         to: userNumber
       });
 
-    console.log(response.sid, response.status)
+    console.log('sms : ', response.sid, response.status)
     return { success: true };
   }
   catch (e) {
-    console.log(e);
-    return { success: false, user };
+    // console.log(e);
+    return { success: false, data };
   }
 
 }
