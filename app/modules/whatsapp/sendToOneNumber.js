@@ -2,14 +2,14 @@ const twilio = require('../../../lib/twilio');
 
 
 // send whatsapp message to one specific number
-const sendSmsToOneNumber = async (user) => {
-
+const sendMessageToOneNumber = async (data) => {
+  const { userNumber, twilioNumber, body } = data;
   try {
     let response = await twilio.messages
       .create({
-        from: 'whatsapp:+14155238886',
-        body: 'Hello there!',
-        to: 'whatsapp:+15005550006'
+        from: `whatsapp:${twilioNumber}`,
+        body: body,
+        to: `whatsapp:${userNumber}`
       });
 
     console.log(response.sid, response.status)
@@ -23,5 +23,5 @@ const sendSmsToOneNumber = async (user) => {
 }
 
 module.exports = {
-  sendSmsToOneNumber
+  sendMessageToOneNumber
 }

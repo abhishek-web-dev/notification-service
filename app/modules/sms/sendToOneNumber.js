@@ -2,14 +2,14 @@ const twilio = require('../../../lib/twilio');
 
 
 // send sms to one specific number
-const sendSmsToOneNumber = async (user) => {
-
+const sendSmsToOneNumber = async (data) => {
+  const { userNumber, twilioNumber, body } = data;
   try {
     let response = await twilio.messages
       .create({
-        body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-        from: '+15017122661',
-        to: '+15558675310'
+        body: body,
+        from: twilioNumber,
+        to: userNumber
       });
 
     console.log(response.sid, response.status)

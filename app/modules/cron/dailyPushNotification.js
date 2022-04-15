@@ -6,23 +6,43 @@ const whatsapp = require('../whatsapp');
 const configConstants = require('../config/constants');
 
 
-const sendSmsNotificationToOneUser = (user) => {
-  // TODO: get user 
+const sendSmsNotificationToOneUser = async (user, smsConfig) => {
+  if (!smsConfig)
+    return { success: true };
 
+  // we can throw some error also
+  if (!(user.mobileNumber.length && smsConfig.twilioNumber.length))
+    return { success: true };
 
+  const payload = {
+    userNumber: user.mobileNumber,
+    twilioNumber: smsConfig.twilioNumber,
+    body: smsConfig.body
+  };
+  return await sms.sendSmsToOneNumber(payload);
 
 }
 
-const sendWhatsappNotificationToOneUser = (user) => {
-  // TODO: get user 
+const sendWhatsappNotificationToOneUser = async (user, whatsappConfig) => {
+  if (!whatsappConfig)
+    return { success: true };
 
+  // we can throw some error also
+  if (!(user.mobileNumber.length && whatsappConfig.twilioNumber.length))
+    return { success: true };
 
+  const payload = {
+    userNumber: user.mobileNumber,
+    twilioNumber: whatsappConfig.twilioNumber,
+    body: whatsappConfig.body
+  };
+  return await whatsapp.sendMessageToOneNumber(payload);
 
 }
 
 
 const sendNotification = async () => {
-  // get user list
+  // get user list and notification config
   const [
     userList,
     smsConfig,
@@ -39,17 +59,21 @@ const sendNotification = async () => {
 
   // send all types of notification for each users
   let result = await Promise.allSettled([
-    ...(userList.map(u => sendSmsNotificationToOneUser(u))),
-    ...(userList.map(u => sendWhatsappNotificationToOneUser(u)))
+    ...(userList.map(user => sendSmsNotificationToOneUser(user, smsConfig))),
+    ...(userList.map(user => sendWhatsappNotificationToOneUser(user, whatsappConfig)))
   ]);
 
   // TODO: schedule for faild noti.
-
+  result.map(r => {
+    console.log('result : ', r.status)
+  })
 }
 
 //push notification daily at 8 AM
 const dailyPushNotificatioCron = () => {
-  const job = new CronJob('0 0 08 * * *', sendNotification);
+  const test1 = '0 */1 * * * *';
+  const prod = '0 0 08 * * *';//every day 8 AM
+  const job = new CronJob(test1, sendNotification);
   job.start();
 }
 
