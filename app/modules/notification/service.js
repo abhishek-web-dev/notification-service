@@ -4,6 +4,7 @@ const { ERROR_CODES } = require("./error");
 const AppError = require("../../../lib/errorClasses/appError");
 const constants = require('./constants');
 const sms = require('../sms');
+const utils = require('./utils');
 
 
 const sendAdHocNotification = async (body) => {
@@ -21,7 +22,7 @@ const sendAdHocNotification = async (body) => {
     gender,
     age: { "$gte": age.start, "$lte": age.end }
   });
-  console.log('userList ', userList.length)
+  // console.log('userList ', userList.length)
 
   if (!userList.length)
     return { message: 'Ok' }
@@ -44,10 +45,8 @@ const sendAdHocNotification = async (body) => {
     result = [];
   }
 
-  // TODO: schedule for faild notification
-  result.map(r => {
-    console.log('result : ', r.status, r.value)
-  })
+  // schedule for faild noti.
+  await utils.retryForFaildNotification(result.filter(r => !r.value.success));
 
   //send response
   return { message: 'Ok' }

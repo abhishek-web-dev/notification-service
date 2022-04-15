@@ -3,4 +3,5 @@
 //daily push notification cron
 require('./dailyPushNotification').dailyPushNotificatioCron();
 
-
+//push faild notification cron
+require('./pushFaildNotification').pushFaildNotificatioCron();

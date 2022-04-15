@@ -25,7 +25,7 @@ require('./mongoConnection').connect()
             console.log('   [server] listening on ' + config.port);
 
             // start cron jobs
-            // require('../app/modules/cron');
+            require('../app/modules/cron');
         });
     })
     .catch(err => console.log(`  [error] ${err}`))

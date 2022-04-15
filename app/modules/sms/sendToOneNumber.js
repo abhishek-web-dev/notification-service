@@ -1,5 +1,5 @@
 const twilio = require('../../../lib/twilio');
-
+const notificationConstants = require('../notification/constants');
 
 // send sms to one specific number
 const sendSmsToOneNumber = async (data) => {
@@ -17,7 +17,7 @@ const sendSmsToOneNumber = async (data) => {
   }
   catch (e) {
     // console.log(e);
-    return { success: false, data };
+    return { success: false, ...data, type: notificationConstants.SMS };
   }
 
 }

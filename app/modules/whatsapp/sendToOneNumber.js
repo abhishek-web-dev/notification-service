@@ -1,5 +1,5 @@
 const twilio = require('../../../lib/twilio');
-
+const notificationConstants = require('../notification/constants');
 
 // send whatsapp message to one specific number
 const sendMessageToOneNumber = async (data) => {
@@ -17,7 +17,7 @@ const sendMessageToOneNumber = async (data) => {
   }
   catch (e) {
     // console.log(e);
-    return { success: false, data };
+    return { success: false, ...data, type: notificationConstants.WHATSAPP };
   }
 
 }

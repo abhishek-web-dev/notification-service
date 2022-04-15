@@ -4,6 +4,7 @@ const configDAL = require('../config/DAL');
 const sms = require('../sms');
 const whatsapp = require('../whatsapp');
 const configConstants = require('../config/constants');
+const notificationUtils = require('../notification/utils');
 
 
 const sendSmsNotificationToOneUser = async (user, smsConfig) => {
@@ -56,7 +57,7 @@ const sendNotification = async () => {
     configDAL.getOneConfig({ type: configConstants.DAILY_WHATSAPP, isActive: true }),
   ]);
 
-  console.log('userList.length ', userList.length)
+  // console.log('userList.length ', userList.length)
   if (!userList.length)//user list zero
     return;
 
@@ -67,10 +68,8 @@ const sendNotification = async () => {
     ...(userList.map(user => sendWhatsappNotificationToOneUser(user, whatsappConfig)))
   ]);
 
-  // TODO: schedule for faild noti.
-  result.map(r => {
-    console.log('result : ', r.status, r.value)
-  })
+  // schedule for faild noti.
+  await notificationUtils.retryForFaildNotification(result.filter(r => !r.value.success));
 }
 
 //push notification daily at 8 AM
@@ -78,7 +77,7 @@ const dailyPushNotificatioCron = () => {
   console.log('Cron has started!')
   const test1 = '0 */1 * * * *';//every minutes
   const prod = '0 0 08 * * *';//every day 8 AM
-  const job = new CronJob(test1, sendNotification);
+  const job = new CronJob(prod, sendNotification);
   job.start();
 }
 

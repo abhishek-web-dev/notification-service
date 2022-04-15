@@ -9,5 +9,6 @@ const configSchema = new mongoose.Schema({
   twilioNumber: { type: String, default: '' }// number given by twilio
 }, { timestamps: true });
 
+//we can create compound index { "type": 1, "isActive": 1 } using mongo compass
 
 module.exports = mongoose.model('configs', configSchema);
